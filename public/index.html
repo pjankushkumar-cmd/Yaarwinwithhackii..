@@ -1,0 +1,13 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    socket.on('predictionUpdate', (data) => {
+        document.getElementById('periodId').innerHTML = `Period: <span>${data.period}</span>`;
+        document.getElementById('predictNumberSmall').innerText = data.numberSmall;
+        document.getElementById('predictNumberBig').innerText = data.numberBig;
+        
+        let clrElement = document.getElementById('colorResult');
+        clrElement.innerText = data.color;
+        clrElement.style.color = (data.color === 'RED') ? '#ff4d4d' : '#00ff00';
+    });
+</script>
