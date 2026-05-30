@@ -1,0 +1,18 @@
+<input type="text" id="pId" placeholder="Period">
+<select id="cId"><option>RED</option><option>GREEN</option></select>
+<input type="number" id="n1" placeholder="Num 1">
+<input type="number" id="n2" placeholder="Num 2">
+<button onclick="send()">Update</button>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    function send() {
+        socket.emit('adminUpdate', {
+            period: document.getElementById('pId').value,
+            color: document.getElementById('cId').value,
+            numberSmall: document.getElementById('n1').value,
+            numberBig: document.getElementById('n2').value
+        });
+    }
+</script>
