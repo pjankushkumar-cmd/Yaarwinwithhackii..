@@ -1,13 +1,35 @@
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-    socket.on('predictionUpdate', (data) => {
-        document.getElementById('periodId').innerHTML = `Period: <span>${data.period}</span>`;
-        document.getElementById('predictNumberSmall').innerText = data.numberSmall;
-        document.getElementById('predictNumberBig').innerText = data.numberBig;
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Yahan wahi CSS rakhein jo aapne pehle bheji thi */
+        :root { --gold: #ffd700; --neon-green: #39ff14; --neon-cyan: #00ffff; --neon-pink: #ff00ff; --neon-red: #ff3131; }
+        body { background: #000; color: #fff; font-family: sans-serif; }
+        /* ... baki aapki CSS ... */
+    </style>
+</head>
+<body>
+    <div class="timer-box" id="timerDisplay">⏳ NEXT HORIZON REFRESH: 00:00s</div>
+    <h2 id="periodId">Period: ----</h2>
+    <div id="colorResult" class="color-badge">-</div>
+    <div class="numbers-container">
+        <div class="num-block"><span id="predictNumberSmall">--</span></div>
+        <div class="num-block"><span id="predictNumberBig">--</span></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('predictionUpdate', (data) => {
+            document.getElementById('periodId').innerHTML = `Period: <span>${data.period}</span>`;
+            document.getElementById('predictNumberSmall').innerText = data.numberSmall;
+            document.getElementById('predictNumberBig').innerText = data.numberBig;
+            let clr = document.getElementById('colorResult');
+            clr.innerText = data.color;
+            clr.style.color = (data.color === "GREEN") ? "var(--neon-green)" : (data.color === "RED" ? "var(--neon-red)" : "#fff");
+        });
         
-        let clrElement = document.getElementById('colorResult');
-        clrElement.innerText = data.color;
-        clrElement.style.color = (data.color === 'RED') ? '#ff4d4d' : '#00ff00';
-    });
-</script>
+        // Aapka original Countdown code yahan rahega...
+    </script>
+</body>
+</html>
