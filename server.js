@@ -1,16 +1,20 @@
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http, { cors: { origin: "*" } });
+const io = require('socket.io')(http, {
+    cors: { origin: "*" }
+});
 const path = require('path');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 io.on('connection', (socket) => {
+    // Jab Admin data bheje
     socket.on('adminUpdate', (data) => {
+        // Global broadcast: Sabhi connected users ko bhej do
         io.emit('predictionUpdate', data);
     });
 });
 
 const PORT = process.env.PORT || 3000;
-http.listen(PORT, () => console.log('Server running on port ' + PORT));
+http.listen(PORT, () => console.log('Server running'));
