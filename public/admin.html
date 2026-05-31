@@ -6,11 +6,11 @@
     Color: <select id="c"><option value="RED">RED</option><option value="GREEN">GREEN</option></select><br><br>
     Pattern A: <input type="number" id="n1"><br><br>
     Pattern B: <input type="number" id="n2"><br><br>
-    <button onclick="send()">UPDATE ALL</button>
+    <button onclick="send()">UPDATE DASHBOARD</button>
 
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
-        const socket = io("https://yaarwinwithhackii-od5h.onrender.com");
+        const socket = io();
         function send() {
             socket.emit('adminUpdate', {
                 period: document.getElementById('p').value,
