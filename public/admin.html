@@ -1,18 +1,24 @@
-<input type="text" id="pId" placeholder="Period">
-<select id="cId"><option>RED</option><option>GREEN</option></select>
-<input type="number" id="n1" placeholder="Num 1">
-<input type="number" id="n2" placeholder="Num 2">
-<button onclick="send()">Update</button>
+<!DOCTYPE html>
+<html>
+<body style="background:#222; color:#fff; padding:20px;">
+    <h2>Admin Control</h2>
+    <input type="text" id="p" placeholder="Period"><br><br>
+    <select id="c"><option value="RED">RED</option><option value="GREEN">GREEN</option></select><br><br>
+    <input type="number" id="n1" placeholder="Pattern A"><br><br>
+    <input type="number" id="n2" placeholder="Pattern B"><br><br>
+    <button onclick="send()" style="padding:10px 20px;">UPDATE DASHBOARD</button>
 
-<script src="/socket.io/socket.io.js"></script>
-<script>
-    const socket = io();
-    function send() {
-        socket.emit('adminUpdate', {
-            period: document.getElementById('pId').value,
-            color: document.getElementById('cId').value,
-            numberSmall: document.getElementById('n1').value,
-            numberBig: document.getElementById('n2').value
-        });
-    }
-</script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        function send() {
+            socket.emit('adminUpdate', {
+                period: document.getElementById('p').value,
+                color: document.getElementById('c').value,
+                numberSmall: document.getElementById('n1').value,
+                numberBig: document.getElementById('n2').value
+            });
+        }
+    </script>
+</body>
+</html>
