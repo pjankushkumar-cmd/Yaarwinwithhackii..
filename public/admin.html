@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-<body style="background:#222; color:#fff; padding:20px;">
-    <h2>Admin Control</h2>
-    <input type="text" id="p" placeholder="Period"><br><br>
-    <select id="c"><option value="RED">RED</option><option value="GREEN">GREEN</option></select><br><br>
-    <input type="number" id="n1" placeholder="Pattern A"><br><br>
-    <input type="number" id="n2" placeholder="Pattern B"><br><br>
-    <button onclick="send()" style="padding:10px 20px;">UPDATE DASHBOARD</button>
+<body style="background:#111; color:#fff; padding:30px;">
+    <h2>Admin Panel</h2>
+    Period: <input type="text" id="p"><br><br>
+    Color: <select id="c"><option value="RED">RED</option><option value="GREEN">GREEN</option></select><br><br>
+    Pattern A: <input type="number" id="n1"><br><br>
+    Pattern B: <input type="number" id="n2"><br><br>
+    <button onclick="send()">UPDATE ALL</button>
 
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script>
-        const socket = io();
+        const socket = io("https://yaarwinwithhackii-od5h.onrender.com");
         function send() {
             socket.emit('adminUpdate', {
                 period: document.getElementById('p').value,
@@ -18,6 +18,7 @@
                 numberSmall: document.getElementById('n1').value,
                 numberBig: document.getElementById('n2').value
             });
+            alert('Updated!');
         }
     </script>
 </body>
